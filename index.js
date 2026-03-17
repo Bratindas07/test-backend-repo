@@ -47,17 +47,14 @@ const readData = () => {
 }
 
 const writeData = (data) => {
-    let success = false;
     const content = JSON.stringify(data)
     fs.writeFile("usersDataBase.txt",content,(err)=>{
         if(err){
             console.log("Error while writing to the database " + err);
         } else {
             console.log("Success in updating the database");
-            success = true;
         }
     })
-    return success;
 }
 // let users = [
 //   { 
@@ -89,16 +86,9 @@ app.post("/signin",(req,res) =>{
         users = JSON.parse(data);
         users.push({"name":name,"password":password, todos:[]})
     }
-    const success = writeData(users);
-    if(!success){
-        res.json({
-            msg: "Error in writing to the database"
-        });
-        return;
-    }
+    writeData(users);
     res.status(200).json({
-        token,
-        success
+        token
     });
 })
 
@@ -132,13 +122,7 @@ app.post("/todo",(req,res) => {
             user.todos.push(todo);
         }
     })
-    const success = writeData(users);
-    if(success==="" || success===undefined){
-        res.json({
-            msg: "Error while writing to the database"
-        });
-        return;
-    }
+    writeData(users);
     res.json({
         msg: "Todo updated"
     })
@@ -210,7 +194,6 @@ app.use((err,req,res,next) => {
         msg: "Internal Server Error"
     })
 })
-
 
 app.listen(port,()=>{
     console.log(`App is listening at http://localhost:${port}`);

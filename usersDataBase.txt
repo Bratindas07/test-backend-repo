@@ -1,1 +1,1 @@
-[{"name":"Bratin","password":"1234","todos":[{"task":"Sleep","done":false},{"task":"Go to gym","done":true}]}]
+[{"name":"Bratin","password":"1234","todos":[{"task":"Sleep","done":false},{"task":"Go to gym","done":true},{"task":"Do something nigga","done":true},{"task":"Do nothing","done":true}]},{"name":"Nigga Boy","password":"NiggaSlaysGays","todos":[{"task":"Become a nigga","done":false}]}]

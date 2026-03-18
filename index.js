@@ -9,8 +9,11 @@ app.use(express.json());
 
 const jswPassword = "SECRET_AND_SECURITY";
 
-const inputValidation = (name) => {
-    const schema = z.string();
+const inputValidation = (name,password) => {
+    const schema = z.object({
+        name: z.string(),
+        password: z.string().min(4)
+    })
     const response = schema.safeParse(name)
     return response.success;
 }
@@ -72,7 +75,7 @@ app.get("/",(req,res) => {
 app.post("/signin",(req,res) =>{
     const name = req.body.name;
     const password = req.body.password;
-    if(!inputValidation(name)){
+    if(!inputValidation(name,password)){
         res.status(411).json({
             msg: "Wrong inputs"
         })
